@@ -17,21 +17,18 @@ export function DownloadPage() {
 
   console.log("Resolved product:", product);
 
-  if (!product || !orderId) {
-  return (
-    <div className="max-w-4xl mx-auto px-8 py-24 text-center">
-      <h1 className="text-3xl mb-4 text-foreground">
-        Invalid or expired download link
-      </h1>
-      <Link
-        to="/products"
-        className="text-sm text-muted-foreground hover:text-foreground"
-      >
-        ← Back to Tools
-      </Link>
-    </div>
-  );
-}
+  if (!product) {
+    return (
+      <div className="max-w-4xl mx-auto px-8 py-24 text-center">
+        <h1 className="text-3xl mb-4">Invalid download link</h1>
+        <p className="text-muted-foreground mb-6">
+          We could not find this product. Please contact support.
+        </p>
+        <Link to="/products">← Back to Tools</Link>
+      </div>
+    );
+  }
+
 
   // Access check (ADD THIS HERE)
   useEffect(() => {

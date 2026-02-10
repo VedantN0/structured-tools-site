@@ -10,15 +10,22 @@ export function ThankYouPage() {
   orderId: string;
   }>();
 
-  useEffect(() => {
-    if (!productId || !orderId) {
-      navigate("/products", { replace: true });
-    }
-  }, [productId, orderId, navigate]);
-
   if (!productId || !orderId) {
-    return null;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl mb-4">Invalid order</h1>
+          <button
+            onClick={() => navigate("/products")}
+            className="text-primary underline"
+          >
+            Go back to products
+          </button>
+        </div>
+      </div>
+    );
   }
+
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center">
