@@ -72,6 +72,7 @@ export function CheckoutPage() {
 
           navigate(
             `/download/${productId}/${orderId}?token=${token}`
+            //`/thank-you?productId=${productId}&orderId=${orderId}&token=${token}`
           );
         } else {
           alert("Payment verification failed. Please contact support.");
