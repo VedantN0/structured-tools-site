@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router";
 import { CheckCircle2, Download } from "lucide-react";
+import { useSearchParams } from "react-router";
 
 export function ThankYouPage() {
   const navigate = useNavigate();
@@ -8,6 +9,9 @@ export function ThankYouPage() {
   productId: string;
   orderId: string;
   }>();
+
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
 
   if (!productId || !orderId) {
     return (
@@ -79,7 +83,7 @@ export function ThankYouPage() {
         {/* CTA */}
         <div className="space-y-4">
           <button
-            onClick={() => navigate(`/download/${productId}/${orderId}`)}
+            onClick={() => navigate(`/download/${productId}/${orderId}?token=${token}`)}
             className="w-full bg-primary text-primary-foreground py-4 rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
           >
             Go to Download Page
