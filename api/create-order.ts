@@ -1,5 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Razorpay from "razorpay";
+import { createOrder } from "./store";
+
 
 export default async function handler(
   req: VercelRequest,
@@ -27,6 +29,8 @@ export default async function handler(
       currency: "INR",
       receipt: `r_${Date.now()}`,
     });
+
+    createOrder(order.id, productId);
 
     return res.status(200).json(order);
   } catch (err: any) {

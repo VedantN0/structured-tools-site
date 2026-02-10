@@ -1,6 +1,8 @@
 // api/verify-payment.ts
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import crypto from "crypto";
+import { markOrderPaid } from "./store";
+
 
 export default async function handler(
   req: VercelRequest,
@@ -43,6 +45,8 @@ export default async function handler(
       console.error("Signature mismatch");
       return res.status(400).json({ success: false });
     }
+
+    markOrderPaid(razorpay_order_id);
 
     // VERIFIED
     return res.status(200).json({ success: true });
