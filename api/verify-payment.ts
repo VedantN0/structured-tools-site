@@ -1,3 +1,4 @@
+// api/verify-payment.ts
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import crypto from "crypto";
 
@@ -16,7 +17,12 @@ export default async function handler(
       razorpay_signature,
     } = req.body;
 
-    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+    if (
+      !razorpay_order_id ||
+      !razorpay_payment_id ||
+      !razorpay_signature
+    ) {
+      console.error("Missing payment fields", req.body);
       return res.status(400).json({ success: false });
     }
 
@@ -41,7 +47,7 @@ export default async function handler(
     // VERIFIED
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error("Verification error:", err);
+    console.error("Verify payment error:", err);
     return res.status(500).json({ success: false });
   }
 }
