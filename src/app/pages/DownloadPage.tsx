@@ -1,7 +1,8 @@
-import { useParams, Link, useNavigate } from "react-router";
+import { useParams, Link } from "react-router";
 import { useEffect, useState } from "react";
 import { Download, FileText, HelpCircle } from "lucide-react";
 import { getProductById } from "../data/products";
+import { useSearchParams } from "react-router-dom";
 
 export function DownloadPage() {
   const { productId, orderId } = useParams<{
@@ -9,20 +10,19 @@ export function DownloadPage() {
     orderId: string;
   }>();
 
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+
   const [accessState, setAccessState] = useState<
     "checking" | "allowed" | "denied"
   >("checking");
 
-  const navigate = useNavigate();
-
-  console.log("Download params:", { productId, orderId });
-
   const product = productId ? getProductById(productId) : undefined;
 
-  console.log("Resolved product:", product);
-
+  // --------------------------------------------------
   // Invalid params
-  if (!productId || !orderId) {
+  // --------------------------------------------------
+  if (!productId || !orderId || !token) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -35,7 +35,9 @@ export function DownloadPage() {
     );
   }
 
+  // --------------------------------------------------
   // Product not found
+  // --------------------------------------------------
   if (!product) {
     return (
       <div className="max-w-4xl mx-auto px-8 py-24 text-center">
@@ -48,32 +50,50 @@ export function DownloadPage() {
     );
   }
 
-  // Access check
+  // --------------------------------------------------
+  // Access check (NEW, correct)
+  // --------------------------------------------------
   useEffect(() => {
     let cancelled = false;
 
-    fetch(`/api/check-access?orderId=${orderId}`)
-      .then((res) => res.json())
-      .then((data) => {
+    async function validateAccess() {
+      try {
+        const res = await fetch("/api/validate-download", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            productId,
+            orderId,
+            token,
+          }),
+        });
+
+        const data = await res.json();
+
         if (cancelled) return;
 
-        if (data.allowed) {
+        if (res.ok && data.ok) {
           setAccessState("allowed");
         } else {
           setAccessState("denied");
         }
-      })
-      .catch(() => {
+      } catch {
         if (!cancelled) {
           setAccessState("denied");
         }
-      });
+      }
+    }
+
+    validateAccess();
 
     return () => {
       cancelled = true;
     };
-  }, [orderId]);
+  }, [productId, orderId, token]);
 
+  // --------------------------------------------------
+  // Loading state
+  // --------------------------------------------------
   if (accessState === "checking") {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -82,6 +102,9 @@ export function DownloadPage() {
     );
   }
 
+  // --------------------------------------------------
+  // Access denied
+  // --------------------------------------------------
   if (accessState === "denied") {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -95,10 +118,9 @@ export function DownloadPage() {
     );
   }
 
-  if (!Array.isArray(product.accessFile)) {
-    console.warn("accessFile missing or invalid for product:", product);
-  }
-
+  // --------------------------------------------------
+  // Access granted (UI unchanged)
+  // --------------------------------------------------
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-5xl mx-auto px-8 py-12">
@@ -219,7 +241,7 @@ export function DownloadPage() {
               </div>
 
               <a
-                href="mailto:hello@structuredtools.co"
+                href="mailto:support@structuredtools.com"
                 className="text-sm text-primary hover:text-primary/80 transition-colors"
               >
                 Contact Support →
