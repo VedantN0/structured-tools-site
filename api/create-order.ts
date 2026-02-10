@@ -23,9 +23,9 @@ export default async function handler(
     });
 
     const order = await razorpay.orders.create({
-      amount: Number(amount),        // MUST be number
+      amount: Number(amount),
       currency: "INR",
-      receipt: `receipt_${productId}_${Date.now()}`,
+      receipt: `r_${Date.now()}`,
     });
 
     return res.status(200).json(order);
