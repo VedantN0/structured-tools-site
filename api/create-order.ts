@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Razorpay from "razorpay";
+import { payments } from "./_payments";
 
 export default async function handler(
   req: VercelRequest,
@@ -18,9 +19,16 @@ export default async function handler(
     });
 
     const order = await razorpay.orders.create({
-      amount,
+      amount, // paise
       currency: "INR",
       receipt: `receipt_${productId}_${Date.now()}`,
+    });
+
+    // Store order (unpaid initially)
+    payments.set(order.id, {
+      orderId: order.id,
+      productId,
+      paid: false,
     });
 
     return res.status(200).json(order);

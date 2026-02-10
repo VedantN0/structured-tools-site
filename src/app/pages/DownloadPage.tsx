@@ -1,4 +1,5 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
+import { useEffect } from "react";
 import { Download, FileText, HelpCircle } from "lucide-react";
 import { getProductById } from "../data/products";
 
@@ -7,6 +8,8 @@ export function DownloadPage() {
     productId: string;
     orderId: string;
   }>();
+
+  const navigate = useNavigate();
 
   const product = productId ? getProductById(productId) : undefined;
 
@@ -25,6 +28,21 @@ export function DownloadPage() {
     </div>
   );
 }
+
+  // Access check (ADD THIS HERE)
+  useEffect(() => {
+    fetch(`/api/check-access?orderId=${orderId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.allowed) {
+          navigate("/products");
+        }
+      })
+      .catch(() => {
+        navigate("/products");
+      });
+  }, [orderId, navigate]);
+
 
   return (
     <div className="min-h-screen bg-background">

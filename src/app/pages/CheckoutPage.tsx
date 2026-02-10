@@ -59,6 +59,8 @@ export function CheckoutPage() {
           alert("Payment verification failed. Please contact support.");
         }
       },
+    };
+
 
       theme: {
         color: "#1D546D",

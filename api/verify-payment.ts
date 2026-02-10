@@ -1,12 +1,13 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import crypto from "crypto";
+import { payments } from "./_payments";
 
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ success: false });
   }
 
   try {
@@ -17,17 +18,24 @@ export default async function handler(
     } = req.body;
 
     const secret = process.env.RAZORPAY_KEY_SECRET!;
-    
-    const generatedSignature = crypto
+    const body = `${razorpay_order_id}|${razorpay_payment_id}`;
+
+    const expectedSignature = crypto
       .createHmac("sha256", secret)
-      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+      .update(body)
       .digest("hex");
 
-    if (generatedSignature !== razorpay_signature) {
+    if (expectedSignature !== razorpay_signature) {
       return res.status(400).json({ success: false });
     }
 
-    // ✅ Payment is verified
+    // Mark order as paid
+    const record = payments.get(razorpay_order_id);
+    if (record) {
+      record.paid = true;
+      payments.set(razorpay_order_id, record);
+    }
+
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error(err);
