@@ -1,4 +1,3 @@
-// api/verify-payment.ts
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import crypto from "crypto";
 
@@ -18,12 +17,7 @@ export default async function handler(
       productId,
     } = req.body;
 
-    if (
-      !razorpay_order_id ||
-      !razorpay_payment_id ||
-      !razorpay_signature ||
-      !productId
-    ) {
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !productId) {
       return res.status(400).json({ success: false });
     }
 
@@ -39,20 +33,16 @@ export default async function handler(
       return res.status(400).json({ success: false });
     }
 
-    // CREATE ACCESS TOKEN (stateless)
-    const payload = JSON.stringify({
-      orderId: razorpay_order_id,
-      productId,
-    });
-
-    const token = crypto
+    // Generate secure download token
+    const downloadToken = crypto
       .createHmac("sha256", secret)
-      .update(payload)
+      .update(`${productId}|${razorpay_order_id}`)
       .digest("hex");
 
     return res.status(200).json({
       success: true,
-      token,
+      orderId: razorpay_order_id,
+      token: downloadToken,
     });
   } catch (err) {
     console.error(err);
