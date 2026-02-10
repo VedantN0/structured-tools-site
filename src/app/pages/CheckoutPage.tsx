@@ -21,15 +21,38 @@ export function CheckoutPage() {
     );
   }
 
-  const handlePayment = () => {
-    // Mock order ID (good enough for now)
-    const orderId = `ORD-${Date.now().toString(36).toUpperCase()}`;
+  const handlePayment = async () => {
+    const response = await fetch("/api/create-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: product.price, // already in paise
+        productId: product.id,
+      }),
+    });
 
-    // Simulate successful payment
-    setTimeout(() => {
-      navigate(`/thank-you/${product.id}/${orderId}`);
-    }, 500);
+    const order = await response.json();
+
+    const options = {
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount: order.amount,
+      currency: "INR",
+      name: "Structured Tools",
+      description: product.name,
+      order_id: order.id,
+      handler: function () {
+        navigate(`/thank-you/${product.id}/${order.id}`);
+      },
+      theme: {
+        color: "#1D546D",
+      },
+    };
+
+    // @ts-ignore
+    const rzp = new window.Razorpay(options);
+    rzp.open();
   };
+
 
   return (
     <div className="min-h-screen bg-background">
