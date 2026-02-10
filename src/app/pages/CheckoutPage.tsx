@@ -66,8 +66,12 @@ export function CheckoutPage() {
         const result = await verifyRes.json();
 
         if (result.success) {
+          const productId = product.id;
+          const orderId = result.orderId;
+          const token = result.token;
+
           navigate(
-            `/download/${product.id}/${result.orderId}?token=${result.token}`
+            `/thank-you?productId=${productId}&orderId=${orderId}&token=${token}`
           );
         } else {
           alert("Payment verification failed. Please contact support.");
