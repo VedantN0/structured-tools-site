@@ -41,7 +41,7 @@ export default async function handler(
     // VERIFIED
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error("Verify error:", err);
+    console.error("Verification error:", err);
     return res.status(500).json({ success: false });
   }
 }
