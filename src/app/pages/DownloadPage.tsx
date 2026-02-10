@@ -17,6 +17,23 @@ export function DownloadPage() {
 
   console.log("Resolved product:", product);
 
+  if (!productId || !orderId) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl mb-4">Invalid or expired download link</h1>
+          <Link
+            to="/products"
+            className="text-primary underline"
+          >
+            Browse tools
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+
   if (!product) {
     return (
       <div className="max-w-4xl mx-auto px-8 py-24 text-center">

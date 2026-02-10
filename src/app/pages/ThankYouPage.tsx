@@ -1,6 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router";
 import { CheckCircle2, Download } from "lucide-react";
-import { useEffect } from "react";
 
 export function ThankYouPage() {
   const navigate = useNavigate();
