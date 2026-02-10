@@ -16,8 +16,8 @@ export const router = createBrowserRouter([
       { path: "products", Component: ProductsPage },
       { path: "product/:id", Component: ProductPage },
       { path: "checkout/:id", Component: CheckoutPage },
-      { path: "/thank-you/:productId/:orderId", Component: ThankYouPage },
-      { path: "/download/:productId/:orderId", Component: DownloadPage },
+      { path: "thank-you/:productId/:orderId", Component: ThankYouPage },
+      { path: "download/:productId/:orderId", Component: DownloadPage },
     ],
   },
 ]);
