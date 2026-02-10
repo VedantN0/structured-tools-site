@@ -36,7 +36,7 @@ export const products: Product[] = [
       "Detailed access and usage instructions (PDF)",
       "Lifetime access to the repository"
     ],
-    price: 2999,
+    price: 299900,
     accessFile: ["/downloads/multi-timeframe-strategy.pdf"],
     features: [
       "Multi-timeframe market analysis",
@@ -69,7 +69,7 @@ export const products: Product[] = [
       "Option to export as Excel",
       "Lifetime access"
     ],
-    price: 500,
+    price: 50000,
     accessFile: ["/downloads/vendor-selection-spreadsheet.pdf"],
     features: [
       "Weighted criteria scoring",

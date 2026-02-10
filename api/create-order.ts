@@ -1,4 +1,3 @@
-// api/create-order.ts
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Razorpay from "razorpay";
 
@@ -13,8 +12,8 @@ export default async function handler(
   try {
     const { amount, productId } = req.body;
 
-    if (!amount || !productId) {
-      return res.status(400).json({ error: "Missing amount or productId" });
+    if (!amount || typeof amount !== "number") {
+      return res.status(400).json({ error: "Invalid amount" });
     }
 
     const razorpay = new Razorpay({
@@ -23,7 +22,7 @@ export default async function handler(
     });
 
     const order = await razorpay.orders.create({
-      amount: amount * 100, // IMPORTANT: convert to paise
+      amount,              // paise
       currency: "INR",
       receipt: `receipt_${productId}_${Date.now()}`,
     });
