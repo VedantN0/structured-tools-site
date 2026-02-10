@@ -2,12 +2,19 @@ import { useParams, Link, useNavigate } from "react-router";
 import { useEffect } from "react";
 import { Download, FileText, HelpCircle } from "lucide-react";
 import { getProductById } from "../data/products";
+import { useState } from "react";
+
 
 export function DownloadPage() {
   const { productId, orderId } = useParams<{
     productId: string;
     orderId: string;
   }>();
+
+  const [accessState, setAccessState] = useState<
+    "checking" | "allowed" | "denied"
+  >("checking");
+
 
   console.log("Download params:", { productId, orderId });
 
@@ -49,18 +56,50 @@ export function DownloadPage() {
 
   // Access check (ADD THIS HERE)
   useEffect(() => {
+    let cancelled = false;
+
     fetch(`/api/check-access?orderId=${orderId}`)
       .then((res) => res.json())
       .then((data) => {
-        if (!data.allowed) {
-          navigate("/products");
+        if (cancelled) return;
+
+        if (data.allowed) {
+          setAccessState("allowed");
+        } else {
+          setAccessState("denied");
         }
       })
       .catch(() => {
-        navigate("/products");
+        if (!cancelled) {
+          setAccessState("denied");
+        }
       });
-  }, [orderId, navigate]);
 
+    return () => {
+      cancelled = true;
+    };
+  }, [orderId]);
+
+  if (accessState === "checking") {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="text-muted-foreground">Verifying access…</p>
+    </div>
+  );
+}
+
+  if (accessState === "denied") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl mb-4">Access denied</h1>
+          <Link to="/products" className="text-primary underline">
+            Browse tools
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
