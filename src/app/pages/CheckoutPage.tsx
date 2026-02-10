@@ -55,13 +55,14 @@ export function CheckoutPage() {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
+            productId: product.id,
           }),
         });
 
         const result = await verifyRes.json();
 
         if (result.success) {
-          navigate(`/thank-you/${product.id}/${order.id}`);
+          navigate(`/download/${product.id}/${order.id}?token=${result.token}`);
         } else {
           alert("Payment verification failed. Please contact support.");
         }

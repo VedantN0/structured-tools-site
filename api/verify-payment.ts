@@ -1,8 +1,6 @@
 // api/verify-payment.ts
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import crypto from "crypto";
-import { markOrderPaid } from "./store";
-
 
 export default async function handler(
   req: VercelRequest,
@@ -17,23 +15,19 @@ export default async function handler(
       razorpay_order_id,
       razorpay_payment_id,
       razorpay_signature,
+      productId,
     } = req.body;
 
     if (
       !razorpay_order_id ||
       !razorpay_payment_id ||
-      !razorpay_signature
+      !razorpay_signature ||
+      !productId
     ) {
-      console.error("Missing payment fields", req.body);
       return res.status(400).json({ success: false });
     }
 
-    const secret = process.env.RAZORPAY_KEY_SECRET;
-    if (!secret) {
-      console.error("Missing RAZORPAY_KEY_SECRET");
-      return res.status(500).json({ success: false });
-    }
-
+    const secret = process.env.RAZORPAY_KEY_SECRET!;
     const body = `${razorpay_order_id}|${razorpay_payment_id}`;
 
     const expectedSignature = crypto
@@ -42,16 +36,26 @@ export default async function handler(
       .digest("hex");
 
     if (expectedSignature !== razorpay_signature) {
-      console.error("Signature mismatch");
       return res.status(400).json({ success: false });
     }
 
-    markOrderPaid(razorpay_order_id);
+    // CREATE ACCESS TOKEN (stateless)
+    const payload = JSON.stringify({
+      orderId: razorpay_order_id,
+      productId,
+    });
 
-    // VERIFIED
-    return res.status(200).json({ success: true });
+    const token = crypto
+      .createHmac("sha256", secret)
+      .update(payload)
+      .digest("hex");
+
+    return res.status(200).json({
+      success: true,
+      token,
+    });
   } catch (err) {
-    console.error("Verify payment error:", err);
+    console.error(err);
     return res.status(500).json({ success: false });
   }
 }

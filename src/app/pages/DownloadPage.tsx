@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { Download, FileText, HelpCircle } from "lucide-react";
 import { getProductById } from "../data/products";
 import { useState } from "react";
+import crypto from "crypto-js";
+import { useSearchParams } from "react-router";
 
 
 export function DownloadPage() {
@@ -10,6 +12,11 @@ export function DownloadPage() {
     productId: string;
     orderId: string;
   }>();
+
+  const [searchParams] = useSearchParams();
+
+  const token = searchParams.get("token");
+
 
   const [accessState, setAccessState] = useState<
     "checking" | "allowed" | "denied"
@@ -23,6 +30,33 @@ export function DownloadPage() {
   const product = productId ? getProductById(productId) : undefined;
 
   console.log("Resolved product:", product);
+
+  if (!token || !productId || !orderId) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1 className="text-2xl">Access denied</h1>
+      </div>
+    );
+  }
+
+  const payload = JSON.stringify({
+    orderId,
+    productId,
+  });
+
+  const expected = crypto.HmacSHA256(
+    payload,
+    import.meta.env.VITE_RAZORPAY_KEY_SECRET
+  ).toString();
+
+  if (expected !== token) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1 className="text-2xl">Access denied</h1>
+      </div>
+    );
+  }
+
 
   if (!productId || !orderId) {
     return (
