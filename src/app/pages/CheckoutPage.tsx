@@ -59,7 +59,8 @@ export function CheckoutPage() {
           alert("Payment verification failed. Please contact support.");
         }
       },
-    };
+
+
 
 
       theme: {

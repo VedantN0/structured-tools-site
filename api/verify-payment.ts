@@ -21,7 +21,6 @@ export default async function handler(
     }
 
     const secret = process.env.RAZORPAY_KEY_SECRET;
-
     if (!secret) {
       console.error("Missing RAZORPAY_KEY_SECRET");
       return res.status(500).json({ success: false });
@@ -39,7 +38,7 @@ export default async function handler(
       return res.status(400).json({ success: false });
     }
 
-    // Payment verified
+    // VERIFIED
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error("Verify error:", err);

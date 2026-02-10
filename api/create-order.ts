@@ -1,6 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Razorpay from "razorpay";
-import { payments } from "./_payments";
 
 export default async function handler(
   req: VercelRequest,
@@ -13,27 +12,24 @@ export default async function handler(
   try {
     const { amount, productId } = req.body;
 
+    if (!amount || !productId) {
+      return res.status(400).json({ error: "Missing fields" });
+    }
+
     const razorpay = new Razorpay({
       key_id: process.env.RAZORPAY_KEY_ID!,
       key_secret: process.env.RAZORPAY_KEY_SECRET!,
     });
 
     const order = await razorpay.orders.create({
-      amount, // paise
+      amount, // in paise
       currency: "INR",
       receipt: `receipt_${productId}_${Date.now()}`,
     });
 
-    // Store order (unpaid initially)
-    payments.set(order.id, {
-      orderId: order.id,
-      productId,
-      paid: false,
-    });
-
     return res.status(200).json(order);
   } catch (err) {
-    console.error(err);
+    console.error("Create order error:", err);
     return res.status(500).json({ error: "Order creation failed" });
   }
 }
