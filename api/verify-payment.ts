@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import crypto from "crypto";
 
+
 function base64url(input: string | Buffer) {
   const buffer = typeof input === "string"
     ? Buffer.from(input, "utf8")
@@ -17,6 +18,14 @@ export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
+  if (
+    !process.env.RAZORPAY_KEY_SECRET ||
+    !process.env.DOWNLOAD_TOKEN_SECRET
+  ) {
+    console.error("Missing required environment variables");
+    return res.status(500).json({ success: false });
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ success: false });
   }
