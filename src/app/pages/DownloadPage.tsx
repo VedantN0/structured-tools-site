@@ -101,6 +101,11 @@ export function DownloadPage() {
     );
   }
 
+  if (!Array.isArray(product.accessFile)) {
+    console.warn("accessFile missing or invalid for product:", product);
+  }
+
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-5xl mx-auto px-8 py-12">
@@ -139,17 +144,23 @@ export function DownloadPage() {
               </div>
               
               <div className="space-y-3">
-                {product.accessFile.map((file, index) => (
-                  <a
-                    key={index}
-                    href={file}
-                    download
-                    className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-4 rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
-                  >
-                    <Download className="w-5 h-5" />
-                    Download Access File
-                  </a>
-                ))}
+                {Array.isArray(product.accessFile) ? (
+                  product.accessFile.map((file, index) => (
+                    <a
+                      key={index}
+                      href={file}
+                      download
+                      className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-4 rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
+                    >
+                      <Download className="w-5 h-5" />
+                      Download Access File
+                    </a>
+                  ))
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    No downloadable files configured for this product.
+                  </p>
+                )}
               </div>
             </div>
 
