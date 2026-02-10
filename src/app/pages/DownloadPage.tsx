@@ -9,9 +9,13 @@ export function DownloadPage() {
     orderId: string;
   }>();
 
+  console.log("Download params:", { productId, orderId });
+
   const navigate = useNavigate();
 
   const product = productId ? getProductById(productId) : undefined;
+
+  console.log("Resolved product:", product);
 
   if (!product || !orderId) {
   return (
