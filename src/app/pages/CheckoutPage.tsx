@@ -71,7 +71,7 @@ export function CheckoutPage() {
           const token = result.token;
 
           navigate(
-            `/thank-you?productId=${productId}&orderId=${orderId}&token=${token}`
+            `/download/${productId}/${orderId}?token=${token}`
           );
         } else {
           alert("Payment verification failed. Please contact support.");
