@@ -40,9 +40,26 @@ export function CheckoutPage() {
       name: "Structured Tools",
       description: product.name,
       order_id: order.id,
-      handler: function () {
-        navigate(`/thank-you/${product.id}/${order.id}`);
+      handler: async function (response: any) {
+        const verifyRes = await fetch("/api/verify-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+          }),
+        });
+
+        const result = await verifyRes.json();
+
+        if (result.success) {
+          navigate(`/thank-you/${product.id}/${order.id}`);
+        } else {
+          alert("Payment verification failed. Please contact support.");
+        }
       },
+
       theme: {
         color: "#1D546D",
       },
