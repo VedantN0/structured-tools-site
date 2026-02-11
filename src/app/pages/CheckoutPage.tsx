@@ -174,13 +174,13 @@ export function CheckoutPage() {
 
               <p className="text-xs text-muted-foreground text-center mt-6">
                 By completing this purchase, you agree to our{" "}
-                <a href="#" className="text-foreground hover:underline">
+                <Link to="/terms" className="text-foreground hover:underline">
                   Terms of Service
-                </a>{" "}
+                </Link>{" "}
                 and{" "}
-                <a href="#" className="text-foreground hover:underline">
+                <Link to="/privacy" className="text-foreground hover:underline">
                   Privacy Policy
-                </a>.
+                </Link>.
               </p>
             </div>
           </div>
