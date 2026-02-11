@@ -36,7 +36,7 @@ export const products: Product[] = [
       "Detailed access and usage instructions (PDF)",
       "Lifetime access to the repository"
     ],
-    price: 100,
+    price: 1000,
     accessFile: ["/downloads/multi-timeframe-strategy.pdf"],
     features: [
       "Multi-timeframe market analysis",
