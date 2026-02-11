@@ -67,32 +67,12 @@ export function Layout() {
       {!hideNav && (
         <footer className="border-t border-border bg-card mt-auto">
           <div className="max-w-7xl mx-auto px-8 py-12">
-            <div className="grid grid-cols-3 gap-12">
+            <div className="grid grid-cols-2 gap-12">
               <div>
                 <h3 className="text-sm mb-4 text-foreground">Structured Tools</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Digital tools that help professionals think clearly, analyze problems, and make better decisions.
                 </p>
-              </div>
-              <div>
-                <h3 className="text-sm mb-4 text-foreground">Resources</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link to="/products" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      All Tools
-                    </Link>
-                  </li>
-                  <li>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      Documentation
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      Roadmap
-                    </a>
-                  </li>
-                </ul>
               </div>
               <div>
                 <h3 className="text-sm mb-4 text-foreground">Company</h3>
@@ -103,14 +83,14 @@ export function Layout() {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <Link to="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       Privacy Policy
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <Link to="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       Terms of Service
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
