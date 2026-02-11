@@ -162,9 +162,14 @@ export function CheckoutPage() {
 
               <button
                 onClick={handlePayment}
-                className="w-full bg-primary text-primary-foreground py-4 rounded-lg hover:bg-primary/90 transition-colors text-lg shadow-sm"
+                className="w-full bg-[#0F3057] hover:bg-[#133d6f] text-white py-4 rounded-lg shadow-md transition-all flex flex-col items-center"
               >
-                Secure Checkout by Razorpay
+                <span className="text-lg font-semibold">
+                  Secure Checkout via Razorpay
+                </span>
+                <span className="text-xs opacity-80">
+                  One-time payment. No subscription. Instant digital access.
+                </span>
               </button>
 
               <p className="text-xs text-muted-foreground text-center mt-6">
