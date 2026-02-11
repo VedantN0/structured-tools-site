@@ -67,13 +67,18 @@ export function Layout() {
       {!hideNav && (
         <footer className="border-t border-border bg-card mt-auto">
           <div className="max-w-7xl mx-auto px-8 py-12">
-            <div className="grid grid-cols-2 gap-12">
+            <div className="grid grid-cols-3 gap-12">
               <div>
                 <h3 className="text-sm mb-4 text-foreground">Structured Tools</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Digital tools that help professionals think clearly, analyze problems, and make better decisions.
                 </p>
               </div>
+              
+              {/* Empty middle column */}
+              <div>
+              </div>
+
               <div>
                 <h3 className="text-sm mb-4 text-foreground">Company</h3>
                 <ul className="space-y-2">

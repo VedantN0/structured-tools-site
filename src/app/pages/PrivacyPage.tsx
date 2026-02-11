@@ -197,10 +197,10 @@ export function PrivacyPage() {
             <p>
               <strong className="text-foreground">Email:</strong>{' '}
               <a 
-                href="mailto:support@structuredtools.co" 
+                href="mailto:support@structuredtools.com" 
                 className="text-primary hover:text-primary/80 transition-colors"
               >
-                support@structuredtools.co
+                support@structuredtools.com
               </a>
             </p>
           </section>

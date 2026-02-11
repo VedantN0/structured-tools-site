@@ -113,8 +113,7 @@ export function TermsPage() {
             <h2 className="text-xl text-foreground mb-4">Payment & Refunds</h2>
             <p className="mb-3">
               <strong className="text-foreground">Payment:</strong> All payments are processed securely 
-              through Razorpay. Prices are listed in Indian Rupees (INR) and are inclusive of applicable 
-              taxes unless otherwise stated.
+              through Razorpay and are inclusive of applicable taxes unless otherwise stated.
             </p>
             <p className="mb-3">
               <strong className="text-foreground">Refund Policy:</strong> Due to the nature of digital 
@@ -127,7 +126,7 @@ export function TermsPage() {
               <li className="list-disc">Product materially differs from the description provided</li>
             </ul>
             <p className="mt-3">
-              Refund requests must be submitted within 14 days of purchase to support@structuredtools.co 
+              Refund requests must be submitted within 14 days of purchase to support@structuredtools.com 
               with a detailed explanation. We will review each request on a case-by-case basis.
             </p>
           </section>
@@ -145,7 +144,7 @@ export function TermsPage() {
             </ul>
             <p className="mt-3">
               If you do not receive access within 10 minutes of payment, please check your spam folder 
-              or contact support@structuredtools.co.
+              or contact support@structuredtools.com.
             </p>
           </section>
 
@@ -159,7 +158,7 @@ export function TermsPage() {
             </p>
             <ul className="space-y-2 ml-5 mt-3">
               <li className="list-disc">
-                Tools are educational and analytical aids—not professional advice
+                Tools are educational and analytical aids, not professional advice
               </li>
               <li className="list-disc">
                 You are responsible for validating outputs and decisions made using our tools
@@ -169,8 +168,7 @@ export function TermsPage() {
                 resulting from use of our products
               </li>
               <li className="list-disc">
-                Financial tools (e.g., options calculators) are for informational purposes only 
-                and do not constitute investment advice
+                Financial tools are for informational purposes only and do not constitute investment advice
               </li>
             </ul>
             <p className="mt-3">
@@ -230,7 +228,7 @@ export function TermsPage() {
             </ul>
             <p className="mt-3">
               We aim to respond to support requests within 2 business days. Support is provided in 
-              English via email at support@structuredtools.co.
+              English via email at support@structuredtools.com.
             </p>
           </section>
 
@@ -299,10 +297,10 @@ export function TermsPage() {
             <p>
               <strong className="text-foreground">Email:</strong>{' '}
               <a 
-                href="mailto:support@structuredtools.co" 
+                href="mailto:support@structuredtools.com" 
                 className="text-primary hover:text-primary/80 transition-colors"
               >
-                support@structuredtools.co
+                support@structuredtools.com
               </a>
             </p>
           </section>
