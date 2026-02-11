@@ -118,6 +118,31 @@ export function DownloadPage() {
     );
   }
 
+  useEffect(() => {
+    if (accessState === "allowed") {
+      const alreadyTracked = sessionStorage.getItem(`purchase_${orderId}`);
+      if (alreadyTracked) return;
+
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "purchase", {
+          transaction_id: orderId,
+          value: product.price / 100,
+          currency: "INR",
+          items: [
+            {
+              item_id: product.id,
+              item_name: product.name,
+            },
+          ],
+        });
+
+        sessionStorage.setItem(`purchase_${orderId}`, "true");
+      }
+    }
+  }, [accessState]);
+
+
+
   // --------------------------------------------------
   // Access granted (UI unchanged)
   // --------------------------------------------------

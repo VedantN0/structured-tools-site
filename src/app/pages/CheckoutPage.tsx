@@ -164,7 +164,7 @@ export function CheckoutPage() {
                 onClick={handlePayment}
                 className="w-full bg-primary text-primary-foreground py-4 rounded-lg hover:bg-primary/90 transition-colors text-lg shadow-sm"
               >
-                Proceed to Payment
+                Secure Checkout by Razorpay
               </button>
 
               <p className="text-xs text-muted-foreground text-center mt-6">

@@ -1,4 +1,5 @@
 import { Link, Outlet, useLocation } from "react-router";
+import { useEffect } from "react";
 
 export function Layout() {
   const location = useLocation();
@@ -8,8 +9,28 @@ export function Layout() {
     location.pathname.includes(path)
   );
 
+  function AnalyticsTracker() {
+    const location = useLocation();
+
+    useEffect(() => {
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("config", "G-74T1CBYNFW", {
+          page_path: location.pathname + location.search,
+        });
+      }
+    }, [location]);
+
+    return null;
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
+
+      <>
+        <AnalyticsTracker />
+        <Outlet />
+      </>
+
       {!hideNav && (
         <header className="border-b border-border bg-card">
           <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
