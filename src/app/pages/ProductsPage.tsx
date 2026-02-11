@@ -75,7 +75,7 @@ export function ProductsPage() {
                 we'd love to hear from you.
               </p>
               <a
-                href="mailto:hello@structuredtools.co"
+                href="mailto:support@structuredtools.com"
                 className="inline-block text-sm text-primary hover:text-primary/80 transition-colors"
               >
                 Get in Touch →

@@ -103,7 +103,7 @@ export function ThankYouPage() {
             Need help?
           </p>
           <a
-            href="mailto:hello@structuredtools.co"
+            href="mailto:support@structuredtools.com"
             className="text-sm text-foreground hover:text-muted-foreground transition-colors"
           >
             Contact Support →
