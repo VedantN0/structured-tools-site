@@ -127,7 +127,7 @@ export function DownloadPage() {
         window.gtag("event", "purchase", {
           transaction_id: orderId,
           value: product.price / 100,
-          currency: "INR",
+          currency: "USD",
           items: [
             {
               item_id: product.id,

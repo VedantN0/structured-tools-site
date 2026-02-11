@@ -44,7 +44,7 @@ export function CheckoutPage() {
     const options = {
       key: import.meta.env.VITE_RAZORPAY_KEY_ID,
       amount: order.amount,
-      currency: "INR",
+      currency: "USD",
       name: "Structured Tools",
       description: product.name,
       order_id: order.id,
