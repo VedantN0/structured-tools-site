@@ -30,7 +30,7 @@ export function Layout() {
                 Tools
               </Link>
               <a 
-                href="mailto:hello@structuredtools.co" 
+                href="mailto:support@structuredtools.com" 
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Contact
@@ -78,7 +78,7 @@ export function Layout() {
                 <h3 className="text-sm mb-4 text-foreground">Company</h3>
                 <ul className="space-y-2">
                   <li>
-                    <a href="mailto:hello@structuredtools.co" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <a href="mailto:support@structuredtools.com" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       Contact
                     </a>
                   </li>
