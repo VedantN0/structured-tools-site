@@ -23,13 +23,6 @@ export default async function handler(
       return res.status(400).json({ ok: false });
     }
 
-    // Console log added
-    console.log("validate-download input", {
-      productId,
-      orderId,
-      tokenPreview: token?.slice(0, 20),
-    });
-
     // --------------------------------------------------
     // 1️. Parse token
     // --------------------------------------------------
@@ -80,20 +73,13 @@ export default async function handler(
     }
 
     if (payload.pid !== productId || payload.oid !== orderId) {
-      // Console log added
-      console.log("PID mismatch", payload.pid, productId);
       return res.status(403).json({ ok: false });
     }
 
     const now = Math.floor(Date.now() / 1000);
     if (now > payload.exp) {
-      // Console log added
-      console.log("now", now, "exp", payload.exp);
       return res.status(403).json({ ok: false });
     }
-
-    // Console log added
-    console.log("decoded payload", payload);
     
 
     // --------------------------------------------------
@@ -101,7 +87,6 @@ export default async function handler(
     // --------------------------------------------------
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error("validate-download error:", err);
     return res.status(500).json({ ok: false });
   }
 }

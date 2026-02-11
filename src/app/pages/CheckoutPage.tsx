@@ -35,7 +35,6 @@ export function CheckoutPage() {
 
     if (!response.ok) {
       const err = await response.text();
-      console.error("Create order failed:", err);
       alert("Unable to start payment. Please try again.");
       return;
     }

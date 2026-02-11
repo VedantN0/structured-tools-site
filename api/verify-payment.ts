@@ -22,7 +22,6 @@ export default async function handler(
     !process.env.RAZORPAY_KEY_SECRET ||
     !process.env.DOWNLOAD_TOKEN_SECRET
   ) {
-    console.error("Missing required environment variables");
     return res.status(500).json({ success: false });
   }
 
@@ -92,7 +91,6 @@ export default async function handler(
       token,
     });
   } catch (err) {
-    console.error("verify-payment error:", err);
     return res.status(500).json({ success: false });
   }
 }

@@ -14,7 +14,6 @@ export default async function handler(
     const { amount, productId } = req.body;
 
     if (!amount || !productId) {
-      console.error("Missing amount or productId", req.body);
       return res.status(400).json({ error: "Invalid request payload" });
     }
 
@@ -31,7 +30,6 @@ export default async function handler(
 
     return res.status(200).json(order);
   } catch (err: any) {
-    console.error("Create order error:", err);
     return res.status(500).json({
       error: "Order creation failed",
       details: err?.error || err,
