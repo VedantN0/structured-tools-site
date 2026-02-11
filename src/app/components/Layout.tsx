@@ -28,7 +28,6 @@ export function Layout() {
 
       <>
         <AnalyticsTracker />
-        <Outlet />
       </>
 
       {!hideNav && (
