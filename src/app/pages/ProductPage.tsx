@@ -111,7 +111,7 @@ export function ProductPage() {
               <div className="mb-8">
                 <div className="text-sm text-muted-foreground mb-2">Price</div>
                 <div className="text-4xl text-foreground mb-1">
-                  ₹{(product.price / 100).toLocaleString('en-IN')}
+                  ${(product.price / 100).toLocaleString('en-IN')}
                 </div>
                 <div className="text-sm text-muted-foreground">
                   One-time payment

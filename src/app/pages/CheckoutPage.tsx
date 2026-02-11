@@ -119,14 +119,14 @@ export function CheckoutPage() {
                 </div>
 
                 <div className="text-lg text-foreground">
-                  ₹{(product.price / 100).toLocaleString("en-IN")}
+                  ${(product.price / 100).toLocaleString("en-IN")}
                 </div>
               </div>
 
               <div className="flex items-center justify-between pt-6">
                 <div className="text-lg text-foreground">Total</div>
                 <div className="text-2xl text-foreground">
-                  ₹{(product.price / 100).toLocaleString("en-IN")}
+                  ${(product.price / 100).toLocaleString("en-IN")}
                 </div>
               </div>
             </div>

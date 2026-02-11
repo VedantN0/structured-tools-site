@@ -28,7 +28,7 @@ export function ProductsPage() {
                   {product.category}
                 </div>
                 <div className="text-xl text-foreground">
-                  ₹{(product.price / 100).toLocaleString('en-IN')}
+                  ${(product.price / 100).toLocaleString('en-IN')}
                 </div>
               </div>
 
