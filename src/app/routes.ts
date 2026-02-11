@@ -6,6 +6,9 @@ import { ProductPage } from "./pages/ProductPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
 import { ThankYouPage } from "./pages/ThankYouPage";
 import { DownloadPage } from "./pages/DownloadPage";
+import { PrivacyPage } from "./pages/PrivacyPage";
+import { TermsPage } from "./pages/TermsPage";
+
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +21,8 @@ export const router = createBrowserRouter([
       { path: "checkout/:id", Component: CheckoutPage },
       { path: "thank-you/:productId/:orderId", Component: ThankYouPage },
       { path: "download/:productId/:orderId", Component: DownloadPage },
+      { path: "/privacy", Component: PrivacyPage },
+      { path: "/terms", Component: TermsPage},
     ],
   },
 ]);
