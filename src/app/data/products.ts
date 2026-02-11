@@ -15,7 +15,7 @@ export interface Product {
 export const products: Product[] = [
   {
     id: "multi-timeframe-trading-strategy",
-    name: "Multi-Timeframe Trading Strategy Framework",
+    name: "Python Crypto Trading Framework for Binance Spot Trading",
     category: "Trading Systems",
     format: "Source Code (Python) + Documentation (PDF)",
     shortDescription:
@@ -36,7 +36,7 @@ export const products: Product[] = [
       "Detailed access and usage instructions (PDF)",
       "Lifetime access to the repository"
     ],
-    price: 1000,
+    price: 299900,
     accessFile: ["/downloads/multi-timeframe-strategy.pdf"],
     features: [
       "Multi-timeframe market analysis",
@@ -69,7 +69,7 @@ export const products: Product[] = [
       "Option to export as Excel",
       "Lifetime access"
     ],
-    price: 100,
+    price: 49900,
     accessFile: ["/downloads/vendor-selection-spreadsheet.pdf"],
     features: [
       "Weighted criteria scoring",
