@@ -1,6 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 async function getAccessToken() {
+  if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_SECRET) {
+    throw new Error("Missing PayPal credentials");
+  }
+
   const auth = Buffer.from(
     `${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_SECRET}`
   ).toString("base64");
@@ -18,6 +22,11 @@ async function getAccessToken() {
   );
 
   const data = await response.json();
+
+  if (!data.access_token) {
+    throw new Error("Failed to obtain PayPal access token");
+  }
+
   return data.access_token;
 }
 
@@ -31,6 +40,10 @@ export default async function handler(
 
   try {
     const { amount, currency } = req.body;
+
+    if (!amount || !currency) {
+      return res.status(400).json({ error: "Missing amount or currency" });
+    }
 
     const accessToken = await getAccessToken();
 
@@ -48,7 +61,7 @@ export default async function handler(
             {
               amount: {
                 currency_code: currency,
-                value: (amount / 100).toFixed(2),
+                value: (amount / 100).toFixed(2), // convert cents to dollars
               },
             },
           ],
@@ -57,8 +70,17 @@ export default async function handler(
     );
 
     const order = await orderResponse.json();
-    return res.status(200).json(order);
-  } catch {
+
+    if (!order.id) {
+      console.error("PayPal order error:", order);
+      return res.status(500).json({ error: "Order creation failed" });
+    }
+
+    // VERY IMPORTANT: return only id for SDK
+    return res.status(200).json({ id: order.id });
+
+  } catch (err) {
+    console.error("PayPal create-order error:", err);
     return res.status(500).json({ error: "PayPal order failed" });
   }
 }

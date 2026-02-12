@@ -13,6 +13,11 @@ export function CheckoutPage() {
     if (!product) return;
     if (typeof window === "undefined" || !(window as any).paypal) return;
 
+    const container = document.getElementById("paypal-button-container");
+    if (!container) return;
+
+    container.innerHTML = "";
+
     const paypal = (window as any).paypal;
 
     paypal.Buttons({
@@ -27,7 +32,8 @@ export function CheckoutPage() {
         });
 
         const data = await res.json();
-        return data.id; // IMPORTANT: return data.id
+        console.log("createOrder:", data);
+        return data.id;
       },
 
       onApprove: async (data: any) => {
@@ -35,7 +41,7 @@ export function CheckoutPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            orderId: data.orderID,   // FIXED HERE
+            orderId: data.orderID,
             productId: product.id,
           }),
         });
@@ -50,10 +56,10 @@ export function CheckoutPage() {
           alert("PayPal capture failed.");
         }
       },
-
     }).render("#paypal-button-container");
 
   }, [product]);
+
 
 
   if (!product) {
