@@ -24,6 +24,7 @@ async function getAccessToken() {
   const data = await response.json();
 
   if (!data.access_token) {
+    console.error("PayPal token error:", data);
     throw new Error("Failed to obtain PayPal access token");
   }
 
@@ -61,10 +62,16 @@ export default async function handler(
             {
               amount: {
                 currency_code: currency,
-                value: (amount / 100).toFixed(2), // convert cents to dollars
+                value: (amount / 100).toFixed(2), // cents → dollars
               },
             },
           ],
+          application_context: {
+            return_url: "https://example.com/success",
+            cancel_url: "https://example.com/cancel",
+            user_action: "PAY_NOW",
+            shipping_preference: "NO_SHIPPING",
+          },
         }),
       }
     );
@@ -72,13 +79,11 @@ export default async function handler(
     const order = await orderResponse.json();
 
     if (!order.id) {
-      console.error("PayPal order error:", order);
+      console.error("PayPal order creation error:", order);
       return res.status(500).json({ error: "Order creation failed" });
     }
 
-    // VERY IMPORTANT: return only id for SDK
     return res.status(200).json({ id: order.id });
-
   } catch (err) {
     console.error("PayPal create-order error:", err);
     return res.status(500).json({ error: "PayPal order failed" });
