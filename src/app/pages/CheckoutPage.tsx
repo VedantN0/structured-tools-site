@@ -11,54 +11,64 @@ export function CheckoutPage() {
 
   useEffect(() => {
     if (!product) return;
-    if (typeof window === "undefined" || !(window as any).paypal) return;
 
-    const container = document.getElementById("paypal-button-container");
-    if (!container) return;
+    const existingScript = document.querySelector(
+      'script[src*="paypal.com/sdk/js"]'
+    );
+    if (existingScript) {
+      existingScript.remove();
+    }
 
-    container.innerHTML = "";
+    const script = document.createElement("script");
+    script.src = `https://www.sandbox.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&currency=${product.currency}&intent=capture`;
+    script.async = true;
 
-    const paypal = (window as any).paypal;
+    script.onload = () => {
+      const paypal = (window as any).paypal;
 
-    paypal.Buttons({
-      createOrder: async () => {
-        const res = await fetch("/api/paypal-create-order", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            amount: product.price,
-            currency: product.currency,
-          }),
-        });
+      if (!paypal) return;
 
-        const data = await res.json();
-        console.log("createOrder:", data);
-        return data.id;
-      },
+      paypal.Buttons({
+        createOrder: async () => {
+          const res = await fetch("/api/paypal-create-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              amount: product.price,
+              currency: product.currency,
+            }),
+          });
 
-      onApprove: async (data: any) => {
-        const res = await fetch("/api/paypal-capture-order", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            orderId: data.orderID,
-            productId: product.id,
-          }),
-        });
+          const data = await res.json();
+          return data.id;
+        },
 
-        const result = await res.json();
+        onApprove: async (data: any) => {
+          const res = await fetch("/api/paypal-capture-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              orderId: data.orderID,
+              productId: product.id,
+            }),
+          });
 
-        if (result.success) {
-          navigate(
-            `/download/${product.id}/${result.orderId}?token=${result.token}`
-          );
-        } else {
-          alert("PayPal capture failed.");
-        }
-      },
-    }).render("#paypal-button-container");
+          const result = await res.json();
 
+          if (result.success) {
+            navigate(
+              `/download/${product.id}/${result.orderId}?token=${result.token}`
+            );
+          } else {
+            alert("PayPal capture failed.");
+          }
+        },
+      }).render("#paypal-button-container");
+    };
+
+    document.body.appendChild(script);
   }, [product]);
+
 
 
 
