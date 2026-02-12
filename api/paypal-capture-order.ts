@@ -1,6 +1,12 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import crypto from "crypto";
 
+const baseUrl =
+  process.env.PAYPAL_ENV === "live"
+    ? "https://api-m.paypal.com"
+    : "https://api-m.sandbox.paypal.com";
+
+
 function base64url(input: string | Buffer) {
   const buffer =
     typeof input === "string" ? Buffer.from(input, "utf8") : input;
@@ -18,7 +24,7 @@ async function getAccessToken() {
   ).toString("base64");
 
   const response = await fetch(
-    "https://api-m.sandbox.paypal.com/v1/oauth2/token",
+    `${baseUrl}/v1/oauth2/token`,
     {
       method: "POST",
       headers: {
@@ -47,7 +53,7 @@ export default async function handler(
     const accessToken = await getAccessToken();
 
     const captureResponse = await fetch(
-      `https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderId}/capture`,
+      `${baseUrl}/v2/checkout/orders/${orderId}/capture`,
       {
         method: "POST",
         headers: {

@@ -4,10 +4,16 @@ import { Lock, ArrowLeft, Shield } from "lucide-react";
 import { useEffect } from "react";
 
 
+
 export function CheckoutPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const product = id ? getProductById(id) : undefined;
+
+  const sdkBase =
+    import.meta.env.VITE_PAYPAL_ENV === "live"
+      ? "https://www.paypal.com"
+      : "https://www.sandbox.paypal.com";
 
   useEffect(() => {
     if (!product) return;
@@ -19,8 +25,13 @@ export function CheckoutPage() {
       existingScript.remove();
     }
 
+    const container = document.getElementById("paypal-button-container");
+    if (container) {
+      container.innerHTML = "";
+    }
+
     const script = document.createElement("script");
-    script.src = `https://www.sandbox.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&currency=${product.currency}&intent=capture`;
+    script.src = `${sdkBase}/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&currency=${product.currency}&intent=capture`;
     script.async = true;
 
     script.onload = () => {
@@ -40,6 +51,9 @@ export function CheckoutPage() {
           });
 
           const data = await res.json();
+          if (!res.ok || !data.id) {
+            throw new Error("Failed to create PayPal order");
+          }
           return data.id;
         },
 
@@ -63,6 +77,11 @@ export function CheckoutPage() {
             alert("PayPal capture failed.");
           }
         },
+
+        onError: (err: any) => {
+          console.error("PayPal SDK error:", err);
+          alert("PayPal encountered an error. Please try again.");
+        }
       }).render("#paypal-button-container");
     };
 

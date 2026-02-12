@@ -1,5 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
+const baseUrl =
+  process.env.PAYPAL_ENV === "live"
+    ? "https://api-m.paypal.com"
+    : "https://api-m.sandbox.paypal.com";
+
 async function getAccessToken() {
   if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_SECRET) {
     throw new Error("Missing PayPal credentials");
@@ -9,17 +14,14 @@ async function getAccessToken() {
     `${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_SECRET}`
   ).toString("base64");
 
-  const response = await fetch(
-    "https://api-m.sandbox.paypal.com/v1/oauth2/token",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${auth}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: "grant_type=client_credentials",
-    }
-  );
+  const response = await fetch(`${baseUrl}/v1/oauth2/token`, {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${auth}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: "grant_type=client_credentials",
+  });
 
   const data = await response.json();
 
@@ -48,33 +50,30 @@ export default async function handler(
 
     const accessToken = await getAccessToken();
 
-    const orderResponse = await fetch(
-      "https://api-m.sandbox.paypal.com/v2/checkout/orders",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          intent: "CAPTURE",
-          purchase_units: [
-            {
-              amount: {
-                currency_code: currency,
-                value: (amount / 100).toFixed(2), // cents → dollars
-              },
+    const orderResponse = await fetch(`${baseUrl}/v2/checkout/orders`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        intent: "CAPTURE",
+        purchase_units: [
+          {
+            amount: {
+              currency_code: currency,
+              value: (amount / 100).toFixed(2),
             },
-          ],
-          application_context: {
-            return_url: "https://example.com/success",
-            cancel_url: "https://example.com/cancel",
-            user_action: "PAY_NOW",
-            shipping_preference: "NO_SHIPPING",
           },
-        }),
-      }
-    );
+        ],
+        application_context: {
+          return_url: "https://structuredtools.com",
+          cancel_url: "https://structuredtools.com",
+          user_action: "PAY_NOW",
+          shipping_preference: "NO_SHIPPING",
+        },
+      }),
+    });
 
     const order = await orderResponse.json();
 
