@@ -8,7 +8,7 @@ export interface Product {
   whoItsFor: string[];
   whatsIncluded: string[];
   price: number;
-  currency: "INR" | "USD";
+  currency: "USD";
   accessFile: string[],
   features: string[];
 }
@@ -80,35 +80,6 @@ export const products: Product[] = [
       "Customizable inputs",
       "Clear decision structuring",
       "Reusable for multiple evaluations"
-    ]
-  },
-  {
-    id: "test-inr-product",
-    name: "Test Product (INR)",
-    category: "Testing",
-    format: "Digital File (PDF)",
-    shortDescription:
-      "A low-cost INR test product to validate full payment pipeline.",
-    description:
-      "This is a test product used to validate Razorpay order creation, payment verification, download access, and analytics tracking in INR.",
-    whoItsFor: [
-      "Internal testing",
-      "Pipeline validation",
-      "Live payment verification"
-    ],
-    whatsIncluded: [
-      "Test PDF download file",
-      "Access verification flow",
-      "Full Razorpay live mode test"
-    ],
-    price: 100, // 1 (upees)
-    currency: "USD",
-    accessFile: ["/downloads/test-inr.pdf"],
-    features: [
-      "Order creation test",
-      "Payment verification test",
-      "Download token validation",
-      "GA4 purchase event validation"
     ]
   },
   {
