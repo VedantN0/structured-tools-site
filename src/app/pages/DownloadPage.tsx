@@ -91,6 +91,29 @@ export function DownloadPage() {
     };
   }, [productId, orderId, token]);
 
+  useEffect(() => {
+    if (accessState === "allowed") {
+      const alreadyTracked = sessionStorage.getItem(`purchase_${orderId}`);
+      if (alreadyTracked) return;
+
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "purchase", {
+          transaction_id: orderId,
+          value: product.price / 100,
+          currency: product.currency,
+          items: [
+            {
+              item_id: product.id,
+              item_name: product.name,
+            },
+          ],
+        });
+
+        sessionStorage.setItem(`purchase_${orderId}`, "true");
+      }
+    }
+  }, [accessState, orderId, product]);
+
   // --------------------------------------------------
   // Loading state
   // --------------------------------------------------
@@ -117,30 +140,6 @@ export function DownloadPage() {
       </div>
     );
   }
-
-  useEffect(() => {
-    if (accessState === "allowed") {
-      const alreadyTracked = sessionStorage.getItem(`purchase_${orderId}`);
-      if (alreadyTracked) return;
-
-      if (typeof window !== "undefined" && window.gtag) {
-        window.gtag("event", "purchase", {
-          transaction_id: orderId,
-          value: product.price / 100,
-          currency: "USD",
-          items: [
-            {
-              item_id: product.id,
-              item_name: product.name,
-            },
-          ],
-        });
-
-        sessionStorage.setItem(`purchase_${orderId}`, "true");
-      }
-    }
-  }, [accessState]);
-
 
 
   // --------------------------------------------------
