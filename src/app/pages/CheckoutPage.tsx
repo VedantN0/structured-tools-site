@@ -9,6 +9,53 @@ export function CheckoutPage() {
   const navigate = useNavigate();
   const product = id ? getProductById(id) : undefined;
 
+  useEffect(() => {
+    if (!product) return;
+
+    if (typeof window === "undefined" || !(window as any).paypal) return;
+
+    const paypal = (window as any).paypal;
+
+    paypal.Buttons({
+      createOrder: async () => {
+        const res = await fetch("/api/paypal-create-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: product.price,
+            currency: product.currency,
+            productId: product.id,
+          }),
+        });
+
+        const data = await res.json();
+        return data.orderID;
+      },
+
+      onApprove: async (data: any) => {
+        const res = await fetch("/api/paypal-capture-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            orderID: data.orderID,
+            productId: product.id,
+          }),
+        });
+
+        const result = await res.json();
+
+        document.getElementById("paypal-button-container")!.innerHTML = "";
+
+        if (result.success) {
+          navigate(
+            `/download/${product.id}/${result.orderId}?token=${result.token}`
+          );
+        }
+      },
+    }).render("#paypal-button-container");
+
+  }, [product]);
+
   if (!product) {
     return (
       <div className="max-w-4xl mx-auto px-8 py-24 text-center">
@@ -85,53 +132,6 @@ export function CheckoutPage() {
         color: "#1D546D",
       },
     };
-
-    useEffect(() => {
-      if (!product) return;
-
-      if (typeof window === "undefined" || !(window as any).paypal) return;
-
-      const paypal = (window as any).paypal;
-
-      paypal.Buttons({
-        createOrder: async () => {
-          const res = await fetch("/api/paypal-create-order", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              amount: product.price,
-              currency: product.currency,
-              productId: product.id,
-            }),
-          });
-
-          const data = await res.json();
-          return data.orderID;
-        },
-
-        onApprove: async (data: any) => {
-          const res = await fetch("/api/paypal-capture-order", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              orderID: data.orderID,
-              productId: product.id,
-            }),
-          });
-
-          const result = await res.json();
-
-          document.getElementById("paypal-button-container")!.innerHTML = "";
-
-          if (result.success) {
-            navigate(
-              `/download/${product.id}/${result.orderId}?token=${result.token}`
-            );
-          }
-        },
-      }).render("#paypal-button-container");
-
-    }, [product]);
 
 
     // @ts-ignore
