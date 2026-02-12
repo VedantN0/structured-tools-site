@@ -11,7 +11,7 @@ export default async function handler(
   }
 
   try {
-    const { amount, productId } = req.body;
+    const { amount, productId, currency } = req.body;
 
     if (!amount || !productId) {
       return res.status(400).json({ error: "Invalid request payload" });
@@ -24,7 +24,7 @@ export default async function handler(
 
     const order = await razorpay.orders.create({
       amount: Number(amount),
-      currency: "USD",
+      currency: currency || "INR",
       receipt: `r_${Date.now()}`,
     });
 

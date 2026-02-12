@@ -8,6 +8,7 @@ export interface Product {
   whoItsFor: string[];
   whatsIncluded: string[];
   price: number;
+  currency: "INR" | "USD";
   accessFile: string[],
   features: string[];
 }
@@ -37,6 +38,7 @@ export const products: Product[] = [
       "Lifetime access to the repository"
     ],
     price: 2999,
+    currency: "USD",
     accessFile: ["/downloads/multi-timeframe-strategy.pdf"],
     features: [
       "Multi-timeframe market analysis",
@@ -70,6 +72,7 @@ export const products: Product[] = [
       "Lifetime access"
     ],
     price: 999,
+    currency: "USD",
     accessFile: ["/downloads/vendor-selection-spreadsheet.pdf"],
     features: [
       "Weighted criteria scoring",
@@ -77,6 +80,64 @@ export const products: Product[] = [
       "Customizable inputs",
       "Clear decision structuring",
       "Reusable for multiple evaluations"
+    ]
+  },
+  {
+    id: "test-inr-product",
+    name: "Test Product (INR)",
+    category: "Testing",
+    format: "Digital File (PDF)",
+    shortDescription:
+      "A low-cost INR test product to validate full payment pipeline.",
+    description:
+      "This is a test product used to validate Razorpay order creation, payment verification, download access, and analytics tracking in INR.",
+    whoItsFor: [
+      "Internal testing",
+      "Pipeline validation",
+      "Live payment verification"
+    ],
+    whatsIncluded: [
+      "Test PDF download file",
+      "Access verification flow",
+      "Full Razorpay live mode test"
+    ],
+    price: 1000, // 10 (upees)
+    currency: "INR",
+    accessFile: ["/downloads/test-inr.pdf"],
+    features: [
+      "Order creation test",
+      "Payment verification test",
+      "Download token validation",
+      "GA4 purchase event validation"
+    ]
+  },
+  {
+    id: "test-usd-product",
+    name: "Test Product (USD)",
+    category: "Testing",
+    format: "Digital File (PDF)",
+    shortDescription:
+      "A low-cost USD test product to validate international payment flow.",
+    description:
+      "This product is used to test international USD payments through Razorpay, including order creation, verification, and token-based download access.",
+    whoItsFor: [
+      "International payment testing",
+      "USD flow validation",
+      "Analytics testing"
+    ],
+    whatsIncluded: [
+      "Test USD file download",
+      "Razorpay USD transaction test",
+      "Access control validation"
+    ],
+    price: 121, // $1.21 (dollars)
+    currency: "USD",
+    accessFile: ["/downloads/test-usd.pdf"],
+    features: [
+      "International payment test",
+      "USD checkout validation",
+      "Token-based download test",
+      "GA4 purchase tracking"
     ]
   }
 ];
