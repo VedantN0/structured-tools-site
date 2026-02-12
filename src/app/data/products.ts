@@ -102,7 +102,7 @@ export const products: Product[] = [
       "Full Razorpay live mode test"
     ],
     price: 100, // 1 (upees)
-    currency: "INR",
+    currency: "USD",
     accessFile: ["/downloads/test-inr.pdf"],
     features: [
       "Order creation test",
