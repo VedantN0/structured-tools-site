@@ -29,6 +29,7 @@ export function CheckoutPage() {
       },
       body: JSON.stringify({
         amount: product.price, // already in paise
+        currency: product.currency,
         productId: product.id,
       }),
     });
