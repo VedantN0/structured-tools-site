@@ -1,6 +1,8 @@
 import { useParams, Link, useNavigate } from "react-router";
 import { getProductById } from "../data/products";
 import { Lock, ArrowLeft, Shield } from "lucide-react";
+import { useEffect } from "react";
+
 
 export function CheckoutPage() {
   const { id } = useParams<{ id: string }>();
@@ -78,10 +80,59 @@ export function CheckoutPage() {
           alert("Payment verification failed. Please contact support.");
         }
       },
+      
       theme: {
         color: "#1D546D",
       },
     };
+
+    useEffect(() => {
+      if (!product) return;
+
+      if (typeof window === "undefined" || !(window as any).paypal) return;
+
+      const paypal = (window as any).paypal;
+
+      paypal.Buttons({
+        createOrder: async () => {
+          const res = await fetch("/api/paypal-create-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              amount: product.price,
+              currency: product.currency,
+              productId: product.id,
+            }),
+          });
+
+          const data = await res.json();
+          return data.orderID;
+        },
+
+        onApprove: async (data: any) => {
+          const res = await fetch("/api/paypal-capture-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              orderID: data.orderID,
+              productId: product.id,
+            }),
+          });
+
+          const result = await res.json();
+
+          document.getElementById("paypal-button-container")!.innerHTML = "";
+
+          if (result.success) {
+            navigate(
+              `/download/${product.id}/${result.orderId}?token=${result.token}`
+            );
+          }
+        },
+      }).render("#paypal-button-container");
+
+    }, [product]);
+
 
     // @ts-ignore
     const rzp = new window.Razorpay(options);
@@ -120,14 +171,16 @@ export function CheckoutPage() {
                 </div>
 
                 <div className="text-lg text-foreground">
-                  ${(product.price / 100).toLocaleString("en-IN")}
+                  {product.currency === "INR" ? "₹" : "$"}
+                  {(product.price / 100).toLocaleString()}
                 </div>
               </div>
 
               <div className="flex items-center justify-between pt-6">
                 <div className="text-lg text-foreground">Total</div>
                 <div className="text-2xl text-foreground">
-                  ${(product.price / 100).toLocaleString("en-IN")}
+                  {product.currency === "INR" ? "₹" : "$"}
+                  {(product.price / 100).toLocaleString()}
                 </div>
               </div>
             </div>
@@ -172,6 +225,8 @@ export function CheckoutPage() {
                   One-time payment. No subscription. Instant digital access.
                 </span>
               </button>
+
+              <div id="paypal-button-container" className="mt-6"></div>
 
               <p className="text-xs text-muted-foreground text-center mt-6">
                 By completing this purchase, you agree to our{" "}
