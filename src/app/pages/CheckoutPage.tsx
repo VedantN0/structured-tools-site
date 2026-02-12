@@ -11,7 +11,6 @@ export function CheckoutPage() {
 
   useEffect(() => {
     if (!product) return;
-
     if (typeof window === "undefined" || !(window as any).paypal) return;
 
     const paypal = (window as any).paypal;
@@ -24,12 +23,11 @@ export function CheckoutPage() {
           body: JSON.stringify({
             amount: product.price,
             currency: product.currency,
-            productId: product.id,
           }),
         });
 
         const data = await res.json();
-        return data.orderID;
+        return data.id; // IMPORTANT: return data.id
       },
 
       onApprove: async (data: any) => {
@@ -37,24 +35,26 @@ export function CheckoutPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            orderID: data.orderID,
+            orderId: data.orderID,   // FIXED HERE
             productId: product.id,
           }),
         });
 
         const result = await res.json();
 
-        document.getElementById("paypal-button-container")!.innerHTML = "";
-
         if (result.success) {
           navigate(
             `/download/${product.id}/${result.orderId}?token=${result.token}`
           );
+        } else {
+          alert("PayPal capture failed.");
         }
       },
+
     }).render("#paypal-button-container");
 
   }, [product]);
+
 
   if (!product) {
     return (
