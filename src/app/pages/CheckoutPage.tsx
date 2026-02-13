@@ -206,16 +206,20 @@ export function CheckoutPage() {
                 </div>
 
                 <div className="text-lg text-foreground">
-                  {product.currency === "INR" ? "₹" : "$"}
-                  {(product.price / 100).toLocaleString()}
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: product.currency,
+                  }).format(product.price / 100)}
                 </div>
               </div>
 
               <div className="flex items-center justify-between pt-6">
                 <div className="text-lg text-foreground">Total</div>
-                <div className="text-2xl text-foreground">
-                  {product.currency === "INR" ? "₹" : "$"}
-                  {(product.price / 100).toLocaleString()}
+                <div className="text-lg text-foreground">
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: product.currency,
+                  }).format(product.price / 100)}
                 </div>
               </div>
             </div>
