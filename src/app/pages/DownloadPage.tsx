@@ -97,7 +97,8 @@ export function DownloadPage() {
       if (alreadyTracked) return;
 
       if (typeof window !== "undefined" && window.gtag) {
-        window.gtag("event", "purchase", {
+        window.gtag("event", "conversion", {
+          send_to: "AW-17951610766/Kl40CLqc_PcbEI6v_-9C",
           transaction_id: orderId,
           value: product.price / 100,
           currency: product.currency,
