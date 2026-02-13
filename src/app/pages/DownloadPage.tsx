@@ -92,28 +92,45 @@ export function DownloadPage() {
   }, [productId, orderId, token]);
 
   useEffect(() => {
-    if (accessState === "allowed") {
-      const alreadyTracked = sessionStorage.getItem(`purchase_${orderId}`);
-      if (alreadyTracked) return;
+    if (accessState !== "allowed" || !product || !orderId) return;
 
-      if (typeof window !== "undefined" && window.gtag) {
-        window.gtag("event", "conversion", {
-          send_to: "AW-17951610766/Kl40CLqc_PcbEI6v_-9C",
-          transaction_id: orderId,
-          value: product.price / 100,
-          currency: product.currency,
-          items: [
-            {
-              item_id: product.id,
-              item_name: product.name,
-            },
-          ],
-        });
+    const alreadyTracked = sessionStorage.getItem(`purchase_${orderId}`);
+    if (alreadyTracked) return;
 
-        sessionStorage.setItem(`purchase_${orderId}`, "true");
-      }
+    if (typeof window !== "undefined" && window.gtag) {
+
+      const value = product.price / 100;
+
+      // -----------------------------
+      // 1️. GA4 Purchase Event
+      // -----------------------------
+      window.gtag("event", "purchase", {
+        transaction_id: orderId,
+        value: value,
+        currency: product.currency,
+        items: [
+          {
+            item_id: product.id,
+            item_name: product.name,
+          },
+        ],
+      });
+
+      // -----------------------------
+      // 2️. Google Ads Conversion Event
+      // -----------------------------
+      window.gtag("event", "conversion", {
+        send_to: "AW-17951610766/Kl40CLqc_PcbEI6v_-9C", // your conversion label
+        value: value,
+        currency: product.currency,
+        transaction_id: orderId,
+      });
+
+      sessionStorage.setItem(`purchase_${orderId}`, "true");
     }
+
   }, [accessState, orderId, product]);
+
 
   // --------------------------------------------------
   // Loading state
