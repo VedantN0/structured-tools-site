@@ -8,20 +8,20 @@ export function PrivacyPage() {
 
   return (
     <div className="w-full">
-      <div className="max-w-4xl mx-auto px-8 py-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl mb-3 text-foreground">Privacy Policy</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl mb-3 text-foreground">Privacy Policy</h1>
           <p className="text-sm text-muted-foreground">
             Last updated: {currentDate}
           </p>
         </div>
 
         {/* Content */}
-        <div className="space-y-10 text-muted-foreground leading-relaxed">
+        <div className="space-y-8 md:space-y-10 text-muted-foreground leading-relaxed">
           {/* Introduction */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Introduction</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Introduction</h2>
             <p>
               Structured Tools provides digital products designed to help professionals think clearly, 
               analyze complex problems, and make better decisions. We are committed to protecting your 
@@ -35,11 +35,11 @@ export function PrivacyPage() {
 
           {/* Information We Collect */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Information We Collect</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Information We Collect</h2>
             <p className="mb-3">
               We collect minimal information necessary to provide our services:
             </p>
-            <ul className="space-y-2 ml-5">
+            <ul className="space-y-2 ml-4 sm:ml-5">
               <li className="list-disc">
                 <strong className="text-foreground">Contact Information:</strong> If you contact our 
                 support team, we collect your email address and any information you choose to provide 
@@ -60,11 +60,11 @@ export function PrivacyPage() {
 
           {/* How We Use Information */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">How We Use Information</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">How We Use Information</h2>
             <p className="mb-3">
               We use the information we collect for the following purposes:
             </p>
-            <ul className="space-y-2 ml-5">
+            <ul className="space-y-2 ml-4 sm:ml-5">
               <li className="list-disc">
                 <strong className="text-foreground">To deliver digital products:</strong> We process 
                 your order and provide download access to your purchased tools.
@@ -86,7 +86,7 @@ export function PrivacyPage() {
 
           {/* Payment Processing */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Payment Processing</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Payment Processing</h2>
             <p>
               All payments are processed through Razorpay, a secure third-party payment gateway that 
               complies with PCI-DSS standards. Structured Tools does not collect, store, or have access 
@@ -100,12 +100,12 @@ export function PrivacyPage() {
 
           {/* Cookies & Analytics */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Cookies & Analytics</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Cookies & Analytics</h2>
             <p>
               We use Google Analytics (GA4) to understand how visitors interact with our website. 
               Google Analytics uses cookies to collect anonymous information such as:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">Pages viewed and time spent on each page</li>
               <li className="list-disc">Browser type and device information</li>
               <li className="list-disc">Approximate geographic location (country/city)</li>
@@ -120,12 +120,12 @@ export function PrivacyPage() {
 
           {/* Data Sharing */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Data Sharing</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Data Sharing</h2>
             <p>
               We do not sell, rent, or trade your personal information to third parties. We only share 
               data with trusted service providers necessary to operate our business:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">
                 <strong className="text-foreground">Razorpay:</strong> For payment processing
               </li>
@@ -142,12 +142,12 @@ export function PrivacyPage() {
 
           {/* Data Retention */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Data Retention</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Data Retention</h2>
             <p>
               We retain personal information only for as long as necessary to fulfill the purposes 
               outlined in this Privacy Policy or as required by law. Specifically:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">
                 Transaction records are kept for accounting and legal compliance purposes
               </li>
@@ -162,11 +162,11 @@ export function PrivacyPage() {
 
           {/* Your Rights */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Your Rights</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Your Rights</h2>
             <p>
               You have the right to:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">Request access to the personal information we hold about you</li>
               <li className="list-disc">Request correction of inaccurate information</li>
               <li className="list-disc">Request deletion of your personal information (subject to legal obligations)</li>
@@ -179,7 +179,7 @@ export function PrivacyPage() {
 
           {/* Changes to This Policy */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Changes to This Policy</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Changes to This Policy</h2>
             <p>
               We may update this Privacy Policy from time to time to reflect changes in our practices 
               or legal requirements. When we make significant changes, we will update the "Last updated" 
@@ -188,8 +188,8 @@ export function PrivacyPage() {
           </section>
 
           {/* Contact */}
-          <section className="bg-card border border-border rounded-lg p-8">
-            <h2 className="text-xl text-foreground mb-4">Contact Us</h2>
+          <section className="bg-card border border-border rounded-lg p-5 sm:p-6 md:p-8">
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Contact Us</h2>
             <p className="mb-3">
               If you have questions about this Privacy Policy or how we handle your information, 
               please contact us:
@@ -207,7 +207,7 @@ export function PrivacyPage() {
         </div>
 
         {/* Back Link */}
-        <div className="mt-12 pt-8 border-t border-border text-center">
+        <div className="mt-10 md:mt-12 pt-6 md:pt-8 border-t border-border text-center">
           <Link
             to="/"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"

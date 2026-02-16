@@ -4,8 +4,8 @@ import { useEffect } from "react";
 export function Layout() {
   const location = useLocation();
   
-  // Hide navigation on checkout, thank you, and download pages for cleaner experience
-  const hideNav = ['/checkout', '/thank-you', '/download'].some(path => 
+  // Hide navigation on checkout and download pages for cleaner experience
+  const hideNav = ['/checkout', '/download'].some(path => 
     location.pathname.includes(path)
   );
 
@@ -32,11 +32,11 @@ export function Layout() {
 
       {!hideNav && (
         <header className="border-b border-border bg-card">
-          <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
-            <Link to="/" className="text-xl tracking-tight text-foreground hover:text-muted-foreground transition-colors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex items-center justify-between">
+            <Link to="/" className="text-lg sm:text-xl tracking-tight text-foreground hover:text-muted-foreground transition-colors">
               Structured Tools
             </Link>
-            <nav className="flex items-center gap-8">
+            <nav className="flex items-center gap-4 sm:gap-8 whitespace-nowrap">
               <Link 
                 to="/" 
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -66,8 +66,8 @@ export function Layout() {
       
       {!hideNav && (
         <footer className="border-t border-border bg-card mt-auto">
-          <div className="max-w-7xl mx-auto px-8 py-12">
-            <div className="grid grid-cols-3 gap-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
               <div>
                 <h3 className="text-sm mb-4 text-foreground">Structured Tools</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -76,8 +76,7 @@ export function Layout() {
               </div>
               
               {/* Empty middle column */}
-              <div>
-              </div>
+              <div className="hidden md:block"></div>
 
               <div>
                 <h3 className="text-sm mb-4 text-foreground">Company</h3>
@@ -100,7 +99,7 @@ export function Layout() {
                 </ul>
               </div>
             </div>
-            <div className="mt-12 pt-8 border-t border-border">
+            <div className="mt-10 md:mt-12 pt-6 md:pt-8 border-t border-border">
               <p className="text-xs text-muted-foreground text-center">
                 © 2026 Structured Tools. All rights reserved.
               </p>

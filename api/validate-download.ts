@@ -77,7 +77,7 @@ export default async function handler(
     }
 
     const now = Math.floor(Date.now() / 1000);
-    if (now > payload.exp) {
+    if (!payload.exp || now >= payload.exp) {
       return res.status(403).json({ ok: false });
     }
     

@@ -5,27 +5,27 @@ export function HomePage() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="max-w-5xl mx-auto px-8 py-28 text-center">
-        <h1 className="text-5xl tracking-tight mb-6 text-foreground leading-tight">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl tracking-tight mb-6 text-foreground leading-tight max-w-3xl mx-auto">
           Digital Tools for
           <br />
           Structured Thinking
         </h1>
-        <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed">
           Downloadable tools that help professionals analyze complex problems, 
           make better decisions, and think with clarity.
         </p>
         <Link
           to="/products"
-          className="inline-block bg-primary text-primary-foreground px-8 py-3.5 rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
+          className="inline-block w-full sm:w-auto bg-primary text-primary-foreground px-6 sm:px-8 py-3.5 rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
         >
           Browse Tools
         </Link>
       </section>
 
       {/* Value Proposition */}
-      <section className="max-w-6xl mx-auto px-8 py-20 border-t border-border">
-        <div className="grid grid-cols-2 gap-20">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 border-t border-border">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-20">
           <div className="space-y-4">
             <div className="w-11 h-11 rounded-lg bg-muted flex items-center justify-center">
               <Brain className="w-5 h-5 text-foreground" />
@@ -76,15 +76,15 @@ export function HomePage() {
       </section>
 
       {/* What We Build */}
-      <section className="max-w-4xl mx-auto px-8 py-20 border-t border-border text-center">
-        <h2 className="text-3xl mb-6 text-foreground">What We Build</h2>
-        <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 border-t border-border text-center">
+        <h2 className="text-2xl sm:text-3xl mb-6 text-foreground">What We Build</h2>
+        <p className="text-base sm:text-lg text-muted-foreground mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed">
           Structured Tools creates digital utilities across multiple domains: from 
           decision frameworks and analytical models to financial calculators and 
           planning tools. Each tool solves a specific problem with precision.
         </p>
         
-        <div className="grid grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-card border border-border rounded-lg p-6 text-left">
             <h3 className="text-sm mb-2 text-foreground">Thinking Tools</h3>
             <p className="text-sm text-muted-foreground">
@@ -109,9 +109,9 @@ export function HomePage() {
       </section>
 
       {/* Philosophy */}
-      <section className="max-w-4xl mx-auto px-8 py-20 border-t border-border">
-        <div className="bg-card border border-border rounded-lg p-12 text-center">
-          <h2 className="text-2xl mb-5 text-foreground">Our Philosophy</h2>
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 border-t border-border">
+        <div className="bg-card border border-border rounded-lg p-6 sm:p-8 md:p-12 text-center">
+          <h2 className="text-xl sm:text-2xl mb-5 text-foreground">Our Philosophy</h2>
           <div className="space-y-4 text-muted-foreground leading-relaxed max-w-2xl mx-auto">
             <p>
               We believe good tools should amplify your thinking, not replace it. 
@@ -127,15 +127,15 @@ export function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-4xl mx-auto px-8 py-20 text-center">
-        <h2 className="text-3xl mb-6 text-foreground">Explore Our Tools</h2>
-        <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 text-center">
+        <h2 className="text-2xl sm:text-3xl mb-6 text-foreground">Explore Our Tools</h2>
+        <p className="text-base sm:text-lg text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto">
           Browse our growing catalog of professional-grade tools designed for 
           structured thinking and rigorous analysis.
         </p>
         <Link
           to="/products"
-          className="inline-block bg-primary text-primary-foreground px-8 py-3.5 rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
+          className="inline-block w-full sm:w-auto bg-primary text-primary-foreground px-6 sm:px-8 py-3.5 rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
         >
           View All Tools
         </Link>

@@ -40,8 +40,8 @@ export function DownloadPage() {
   // --------------------------------------------------
   if (!product) {
     return (
-      <div className="max-w-4xl mx-auto px-8 py-24 text-center">
-        <h1 className="text-3xl mb-4">Invalid download link</h1>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
+        <h1 className="text-2xl sm:text-3xl mb-4">Invalid download link</h1>
         <p className="text-muted-foreground mb-6">
           We could not find this product. Please contact support.
         </p>
@@ -165,9 +165,9 @@ export function DownloadPage() {
   // --------------------------------------------------
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-5xl mx-auto px-8 py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-8 md:mb-12">
           <Link
             to="/"
             className="inline-block text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
@@ -175,28 +175,28 @@ export function DownloadPage() {
             ← Home
           </Link>
 
-          <h1 className="text-4xl mb-3 text-foreground">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl mb-3 text-foreground">
             Download Access
           </h1>
 
           <p className="text-muted-foreground">
             Order reference:{" "}
-            <span className="font-mono text-sm">{orderId}</span>
+            <span className="font-mono text-sm break-all">{orderId}</span>
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column */}
-          <div className="col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6 md:space-y-8">
             {/* Main Download Card */}
-            <div className="bg-card border border-border rounded-lg p-10">
-              <div className="flex items-start gap-6 mb-8">
-                <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                  <FileText className="w-7 h-7 text-primary" />
+            <div className="bg-card border border-border rounded-lg p-5 sm:p-6 md:p-10">
+              <div className="flex items-start gap-4 sm:gap-6 mb-6 md:mb-8">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                  <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
                 </div>
 
                 <div className="flex-1">
-                  <h2 className="text-xl mb-2 text-foreground">
+                  <h2 className="text-lg sm:text-xl mb-2 text-foreground">
                     Access files for {product.name}
                   </h2>
 
@@ -215,7 +215,7 @@ export function DownloadPage() {
                       key={index}
                       href={file}
                       download
-                      className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-4 rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 sm:px-6 py-3 sm:py-4 rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
                     >
                       <Download className="w-5 h-5" />
                       Download Access File
@@ -230,7 +230,7 @@ export function DownloadPage() {
             </div>
 
             {/* What's Included */}
-            <div className="bg-card border border-border rounded-lg p-8">
+            <div className="bg-card border border-border rounded-lg p-5 sm:p-6 md:p-8">
               <h2 className="text-lg mb-6 text-foreground">
                 What you're downloading
               </h2>
@@ -268,8 +268,8 @@ export function DownloadPage() {
           </div>
 
           {/* Right Column */}
-          <div className="col-span-1 space-y-6">
-            <div className="bg-card border border-border rounded-lg p-6">
+          <div className="lg:col-span-1 space-y-6">
+            <div className="bg-card border border-border rounded-lg p-5 sm:p-6">
               <div className="flex items-start gap-3 mb-4">
                 <HelpCircle className="w-5 h-5 text-muted-foreground shrink-0 mt-0.5" />
                 <div>
@@ -290,7 +290,7 @@ export function DownloadPage() {
               </a>
             </div>
 
-            <div className="bg-card border border-border rounded-lg p-6">
+            <div className="bg-card border border-border rounded-lg p-5 sm:p-6">
               <h3 className="text-sm mb-3 text-foreground">
                 Your Access
               </h3>

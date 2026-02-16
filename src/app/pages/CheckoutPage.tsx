@@ -18,6 +18,8 @@ export function CheckoutPage() {
   useEffect(() => {
     if (!product) return;
 
+    let script: HTMLScriptElement | null = null;
+
     const existingScript = document.querySelector(
       'script[src*="paypal.com/sdk/js"]'
     );
@@ -30,7 +32,7 @@ export function CheckoutPage() {
       container.innerHTML = "";
     }
 
-    const script = document.createElement("script");
+    script = document.createElement("script");
     script.src = `${sdkBase}/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&currency=${product.currency}&intent=capture`;
     script.async = true;
 
@@ -86,6 +88,12 @@ export function CheckoutPage() {
     };
 
     document.body.appendChild(script);
+    
+    return () => {
+      if (script) {
+        script.remove();
+      }
+    };
   }, [product]);
 
 
@@ -93,8 +101,8 @@ export function CheckoutPage() {
 
   if (!product) {
     return (
-      <div className="max-w-4xl mx-auto px-8 py-24 text-center">
-        <h1 className="text-3xl mb-4 text-foreground">Tool Not Found</h1>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
+        <h1 className="text-2xl sm:text-3xl mb-4 text-foreground">Tool Not Found</h1>
         <Link
           to="/products"
           className="inline-block text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -105,6 +113,7 @@ export function CheckoutPage() {
     );
   }
 
+  {/*
   const handlePayment = async () => {
     const response = await fetch("/api/create-order", {
       method: "POST",
@@ -156,7 +165,6 @@ export function CheckoutPage() {
 
           navigate(
             `/download/${productId}/${orderId}?token=${token}`
-            //`/thank-you?productId=${productId}&orderId=${orderId}&token=${token}`
           );
         } else {
           alert("Payment verification failed. Please contact support.");
@@ -173,28 +181,29 @@ export function CheckoutPage() {
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
+  */}
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-5xl mx-auto px-8 py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-8 md:mb-12">
           <Link
             to={`/product/${product.id}`}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 md:mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Product
           </Link>
 
-          <h1 className="text-3xl text-foreground">Checkout</h1>
+          <h1 className="text-2xl sm:text-3xl text-foreground">Checkout</h1>
         </div>
 
-        <div className="grid grid-cols-5 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Left Column */}
-          <div className="col-span-3 space-y-8">
+          <div className="lg:col-span-3 space-y-6 md:space-y-8">
             {/* Order Summary */}
-            <div className="bg-card border border-border rounded-lg p-8">
+            <div className="bg-card border border-border rounded-lg p-5 sm:p-6 md:p-8">
               <h2 className="text-lg mb-6 text-foreground">Order Summary</h2>
 
               <div className="flex items-start justify-between pb-6 border-b border-border">
@@ -225,11 +234,12 @@ export function CheckoutPage() {
             </div>
 
             {/* Payment Section */}
-            <div className="bg-card border border-border rounded-lg p-8">
+            <div className="bg-card border border-border rounded-lg p-5 sm:p-6 md:p-8">
               <h2 className="text-lg mb-6 text-foreground">Payment</h2>
 
               <div className="mb-8 space-y-6">
-                <div className="bg-muted/50 border border-border rounded-lg p-6">
+                {/*
+                <div className="bg-muted/50 border border-border rounded-lg p-4 sm:p-6">
                   <div className="flex items-start gap-3 mb-3">
                     <Shield className="w-5 h-5 text-muted-foreground shrink-0 mt-0.5" />
                     <div>
@@ -243,6 +253,7 @@ export function CheckoutPage() {
                     </div>
                   </div>
                 </div>
+                */}
 
                 <div className="flex items-start gap-3 text-sm text-muted-foreground">
                   <Lock className="w-4 h-4 shrink-0 mt-0.5" />
@@ -253,17 +264,19 @@ export function CheckoutPage() {
                 </div>
               </div>
 
+              {/*
               <button
                 onClick={handlePayment}
-                className="w-full bg-[#0F3057] hover:bg-[#133d6f] text-white py-4 rounded-lg shadow-md transition-all flex flex-col items-center"
+                className="w-full bg-[#0F3057] hover:bg-[#133d6f] text-white py-3 sm:py-4 rounded-lg shadow-md transition-all flex flex-col items-center"
               >
-                <span className="text-lg font-semibold">
+                <span className="text-base sm:text-lg font-semibold">
                   Secure Checkout via Razorpay
                 </span>
                 <span className="text-xs opacity-80">
                   One-time payment. No subscription. Instant digital access.
                 </span>
               </button>
+              */}
 
               <div id="paypal-button-container" className="mt-6"></div>
 
@@ -281,15 +294,15 @@ export function CheckoutPage() {
           </div>
 
           {/* Right Column */}
-          <div className="col-span-2 space-y-6">
-            <div className="bg-card border border-border rounded-lg p-6">
+          <div className="lg:col-span-2 space-y-6">
+            <div className="bg-card border border-border rounded-lg p-5 sm:p-6">
               <h3 className="text-sm mb-4 text-foreground">
                 After Payment
               </h3>
               <ol className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex gap-3">
                   <span className="text-foreground shrink-0">1.</span>
-                  <span>Complete payment via Razorpay</span>
+                  <span>Complete your secure payment</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-foreground shrink-0">2.</span>
@@ -302,7 +315,7 @@ export function CheckoutPage() {
               </ol>
             </div>
 
-            <div className="bg-card border border-border rounded-lg p-6">
+            <div className="bg-card border border-border rounded-lg p-5 sm:p-6">
               <h3 className="text-sm mb-4 text-foreground">
                 Your Purchase Includes
               </h3>

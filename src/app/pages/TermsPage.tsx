@@ -8,20 +8,20 @@ export function TermsPage() {
 
   return (
     <div className="w-full">
-      <div className="max-w-4xl mx-auto px-8 py-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl mb-3 text-foreground">Terms of Service</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl mb-3 text-foreground">Terms of Service</h1>
           <p className="text-sm text-muted-foreground">
             Last updated: {currentDate}
           </p>
         </div>
 
         {/* Content */}
-        <div className="space-y-10 text-muted-foreground leading-relaxed">
+        <div className="space-y-8 md:space-y-10 text-muted-foreground leading-relaxed max-w-3xl">
           {/* Introduction */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Introduction</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Introduction</h2>
             <p>
               Welcome to Structured Tools. By accessing our website and purchasing our digital products, 
               you agree to comply with and be bound by these Terms of Service. Please read them carefully 
@@ -36,11 +36,11 @@ export function TermsPage() {
 
           {/* Products & Licenses */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Products & Licenses</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Products & Licenses</h2>
             <p className="mb-3">
               When you purchase a digital tool from Structured Tools, you receive:
             </p>
-            <ul className="space-y-2 ml-5">
+            <ul className="space-y-2 ml-4 sm:ml-5">
               <li className="list-disc">
                 <strong className="text-foreground">Personal License:</strong> A non-exclusive, 
                 non-transferable license to use the tool for your personal or professional work.
@@ -59,11 +59,11 @@ export function TermsPage() {
 
           {/* Permitted Use */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Permitted Use</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Permitted Use</h2>
             <p className="mb-3">
               You may:
             </p>
-            <ul className="space-y-2 ml-5">
+            <ul className="space-y-2 ml-4 sm:ml-5">
               <li className="list-disc">
                 Use the tool for personal or commercial work (your own business, consulting, analysis, etc.)
               </li>
@@ -81,11 +81,11 @@ export function TermsPage() {
 
           {/* Prohibited Use */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Prohibited Use</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Prohibited Use</h2>
             <p className="mb-3">
               You may not:
             </p>
-            <ul className="space-y-2 ml-5">
+            <ul className="space-y-2 ml-4 sm:ml-5">
               <li className="list-disc">
                 Resell, redistribute, or share the tool files with others who have not purchased their 
                 own license
@@ -110,7 +110,7 @@ export function TermsPage() {
 
           {/* Payment & Refunds */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Payment & Refunds</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Payment & Refunds</h2>
             <p className="mb-3">
               <strong className="text-foreground">Payment:</strong> All payments are processed securely 
               through Razorpay and are inclusive of applicable taxes unless otherwise stated.
@@ -120,7 +120,7 @@ export function TermsPage() {
               products (instant access upon purchase), all sales are final. We do not offer refunds 
               except in the following cases:
             </p>
-            <ul className="space-y-2 ml-5">
+            <ul className="space-y-2 ml-4 sm:ml-5">
               <li className="list-disc">Technical issues that prevent you from downloading or accessing the tool</li>
               <li className="list-disc">Duplicate purchases made in error</li>
               <li className="list-disc">Product materially differs from the description provided</li>
@@ -133,11 +133,11 @@ export function TermsPage() {
 
           {/* Delivery */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Delivery</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Delivery</h2>
             <p>
               Digital products are delivered instantly after successful payment. You will receive:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">Immediate access to a download page</li>
               <li className="list-disc">An email confirmation with download links and your license information</li>
               <li className="list-disc">Permanent access to re-download the tool from your order page</li>
@@ -150,13 +150,13 @@ export function TermsPage() {
 
           {/* Product Accuracy */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Product Accuracy & Disclaimer</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Product Accuracy & Disclaimer</h2>
             <p>
               Our tools are designed to help you think clearly and analyze problems, but they are 
               provided "as is" without warranties of any kind. While we strive for accuracy and 
               reliability:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">
                 Tools are educational and analytical aids, not professional advice
               </li>
@@ -179,11 +179,11 @@ export function TermsPage() {
 
           {/* Updates */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Updates & Improvements</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Updates & Improvements</h2>
             <p>
               We regularly improve our tools and may release updates that include:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">Bug fixes and performance improvements</li>
               <li className="list-disc">New features or enhanced functionality</li>
               <li className="list-disc">Updated documentation</li>
@@ -197,12 +197,12 @@ export function TermsPage() {
 
           {/* Intellectual Property */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Intellectual Property</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Intellectual Property</h2>
             <p>
               All intellectual property rights in the tools, documentation, and website content 
               belong to Structured Tools. This includes but is not limited to:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">Tool design, code, and formulas</li>
               <li className="list-disc">Documentation and user guides</li>
               <li className="list-disc">Trademarks, logos, and branding</li>
@@ -216,11 +216,11 @@ export function TermsPage() {
 
           {/* Support */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Support</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Support</h2>
             <p>
               We provide email support for all customers to help with:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">Download and access issues</li>
               <li className="list-disc">Questions about how to use the tool</li>
               <li className="list-disc">Technical problems or bugs</li>
@@ -234,12 +234,12 @@ export function TermsPage() {
 
           {/* Limitation of Liability */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Limitation of Liability</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Limitation of Liability</h2>
             <p>
               To the maximum extent permitted by law, Structured Tools shall not be liable for any 
               indirect, incidental, special, consequential, or punitive damages arising from:
             </p>
-            <ul className="space-y-2 ml-5 mt-3">
+            <ul className="space-y-2 ml-4 sm:ml-5 mt-3">
               <li className="list-disc">Your use or inability to use our tools</li>
               <li className="list-disc">Decisions or actions taken based on tool outputs</li>
               <li className="list-disc">Errors or inaccuracies in the tools</li>
@@ -252,7 +252,7 @@ export function TermsPage() {
 
           {/* Termination */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Termination</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Termination</h2>
             <p>
               We reserve the right to terminate or suspend your access to our products if you violate 
               these Terms of Service, including but not limited to unauthorized redistribution, 
@@ -266,7 +266,7 @@ export function TermsPage() {
 
           {/* Changes to Terms */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Changes to These Terms</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Changes to These Terms</h2>
             <p>
               We may update these Terms of Service from time to time to reflect changes in our 
               practices, products, or legal requirements. When we make changes, we will update 
@@ -280,17 +280,17 @@ export function TermsPage() {
 
           {/* Governing Law */}
           <section>
-            <h2 className="text-xl text-foreground mb-4">Governing Law</h2>
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Governing Law</h2>
             <p>
               These Terms of Service are governed by the laws of India. Any disputes arising from 
               these terms or your use of our products shall be subject to the exclusive jurisdiction 
-              of the courts in [Your City/State], India.
+              of the courts in India.
             </p>
           </section>
 
           {/* Contact */}
-          <section className="bg-card border border-border rounded-lg p-8">
-            <h2 className="text-xl text-foreground mb-4">Contact Us</h2>
+          <section className="bg-card border border-border rounded-lg p-5 sm:p-6 md:p-8">
+            <h2 className="text-lg sm:text-xl text-foreground mb-4">Contact Us</h2>
             <p className="mb-3">
               If you have questions about these Terms of Service, please contact us:
             </p>
@@ -307,7 +307,7 @@ export function TermsPage() {
         </div>
 
         {/* Back Link */}
-        <div className="mt-12 pt-8 border-t border-border text-center">
+        <div className="mt-10 md:mt-12 pt-6 md:pt-8 border-t border-border text-center">
           <Link
             to="/"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
