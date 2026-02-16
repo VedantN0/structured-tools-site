@@ -11,6 +11,7 @@ export interface Product {
   currency: "USD";
   accessFile: string[],
   features: string[];
+  isPublic: boolean;
 }
 
 export const products: Product[] = [
@@ -46,7 +47,8 @@ export const products: Product[] = [
       "Deterministic bar-by-bar execution",
       "Safe exchange API interaction",
       "Extensible and modular architecture"
-    ]
+    ],
+    isPublic: true
   },
   {
     id: "vendor-selection-spreadsheet",
@@ -80,7 +82,8 @@ export const products: Product[] = [
       "Customizable inputs",
       "Clear decision structuring",
       "Reusable for multiple evaluations"
-    ]
+    ],
+    isPublic: true
   },
   {
     id: "test-usd-product",
@@ -90,7 +93,7 @@ export const products: Product[] = [
     shortDescription:
       "A low-cost USD test product to validate international payment flow.",
     description:
-      "This product is used to test international USD payments through Razorpay, including order creation, verification, and token-based download access.",
+      "This product is used to test international USD payments, including order creation, verification, and token-based download access.",
     whoItsFor: [
       "International payment testing",
       "USD flow validation",
@@ -98,7 +101,7 @@ export const products: Product[] = [
     ],
     whatsIncluded: [
       "Test USD file download",
-      "Razorpay USD transaction test",
+      "USD transaction test",
       "Access control validation"
     ],
     price: 121, // $1.21 (dollars)
@@ -109,7 +112,8 @@ export const products: Product[] = [
       "USD checkout validation",
       "Token-based download test",
       "GA4 purchase tracking"
-    ]
+    ],
+    isPublic: false
   }
 ];
 

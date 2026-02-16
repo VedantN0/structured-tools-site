@@ -17,7 +17,9 @@ export function ProductsPage() {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-          {products.map((product) => (
+          {products
+          .filter(product => product.isPublic !== false)
+          .map((product) => (
             <Link
               key={product.id}
               to={`/product/${product.id}`}
