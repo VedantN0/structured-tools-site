@@ -14,7 +14,7 @@ export function Layout() {
 
     useEffect(() => {
       if (typeof window !== "undefined" && window.gtag) {
-        window.gtag("config", "G-74T1CBYNFW", {
+        window.gtag("config", "G-ETJH54WZ1G", {
           page_path: location.pathname + location.search,
         });
       }
